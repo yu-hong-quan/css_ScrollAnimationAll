@@ -115,14 +115,14 @@
 	function scrollScale(delta) {
 		if ($('.nowSticky')[0].style.position == 'fixed' && delta == 'down') {
 			// console.log('down')
-			if (scaleValue > 0 && scaleValue <= 2) {
-				scaleValue += 0.008;
+			if (scaleValue > 0 && scaleValue <= 3) {
+				scaleValue += 0.05;
 				$('.nowSticky').css('transform', `scale(${scaleValue})`)
 			}
 		} else if ($('.nowSticky')[0].style.position == 'fixed' && delta == 'up') {
 			// console.log('up')
 			if (scaleValue >= 1) {
-				scaleValue -= 0.008;
+				scaleValue -= 0.05;
 				$('.nowSticky').css('transform', `scale(${scaleValue})`)
 			}
 		}
