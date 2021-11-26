@@ -142,7 +142,6 @@
 
 	/* 滚动缩放并伴随暗度增强动画 滚动事件  start*/
 	function scrollScale(delta) {
-		// console.log(isElementInViewport($('.box2_scrollScale')[0]))
 		if (nowSticky.style.position == 'fixed' && delta == 'down') {
 			if (scaleValue > 0 && scaleValue <= 2) {
 				scaleValue += 0.005;
@@ -174,8 +173,6 @@
 
 	/* 判断鼠标滚动向下还是向上并给予图片蠕动效果 start*/
 	let moveImg = document.getElementsByClassName('peristalsis_img')[0];
-	console.log(moveImg);
-
 	function onMouseWheel(ev) {
 		/*当鼠标滚轮事件发生时，执行一些操作*/
 		var ev = ev || window.event;
@@ -192,10 +189,8 @@
 		}
 		return false;
 	}
-
 	addEvent(window, 'mousewheel', onMouseWheel);
 	addEvent(window, 'DOMMouseScroll', onMouseWheel);
-
 	function addEvent(obj, xEvent, fn) {
 		if (obj.attachEvent) {
 			obj.attachEvent('on' + xEvent, fn);
@@ -210,7 +205,7 @@
 	function scrollSwitchImg() {
 		let scrollTtop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
 		let offsetMain = $('.switchImg_Info')[0].offsetTop;
-		if (scrollTtop >= (offsetMain - 300)) {
+		if (scrollTtop >= (offsetMain - 200)) {
 			$('.switchImg_Info .one')[0].style.opacity = '1';
 			$('.switchImg_Info .two')[0].style.opacity = '0';
 			$('.switchImg_Info h2')[0].innerText = '前避障';
