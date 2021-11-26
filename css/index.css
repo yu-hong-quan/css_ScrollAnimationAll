@@ -9,7 +9,7 @@ body {
 .nowBox {
 	width: 100%;
 	height: 800px;
-	background: #000000;
+	background: red;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -30,8 +30,8 @@ body {
 	flex-direction: column;
 }
 
-.box1>span {
-	font-size: 30px;
+.box1>span,.peristalsis_imgBox>span {
+	font-size: 40px;
 	background: linear-gradient(90deg, #d95e00 30%, #ffa353, #d95e00 70%);
 	-webkit-background-clip: text;
 	color: transparent;
@@ -46,7 +46,6 @@ body {
 	margin-bottom: 50px;
 	width: 910px;
 	height: 450px;
-	background: #D95E00;
 	position: relative;
 }
 
@@ -113,7 +112,13 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	overflow: hidden;
 	/* margin-top: 100px; */
+}
+
+.sticky {
+    color: #FFFFFF;
+	z-index: 13;
 }
 
 .children_left {
@@ -121,7 +126,6 @@ body {
     flex-direction: column;
     margin-left: -500px;
     box-sizing: border-box;
-	
 }
 
 .children_left>div {
@@ -144,14 +148,9 @@ body {
     font-size: 20px;
 }
 
-.sticky {
-    color: #FFFFFF;
-	z-index: 10;
-}
-
 .nowSticky {
     width:910px !important;
-    height: 1000px;
+    height: 900px;
     position: absolute;
     z-index:9;
     top: 0;
@@ -160,5 +159,40 @@ body {
 	background-position: center;
 	transform: scale(1);
 }
-
+.box2_mask{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: #000;
+	z-index: 12;
+	opacity: .9;
+}
 /* 滚动缩放并伴随暗度增强动画效果 end */
+
+
+/* 判断鼠标滚动向下还是向上并给予图片蠕动效果 start */
+.peristalsis_imgBox{
+	width: 100%;
+	height: 800px;
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+	z-index: 20;
+	position: relative;
+	background: #000;
+}
+.peristalsis_imgBox .peristalsis_img{
+	width: 100%;
+	height: 700px;
+	overflow: auto;
+	background-image: url('../img/2.jpg');
+	background-repeat: no-repeat;
+	background-position: 50% -50px;
+	background-size: auto calc(100% + 200px);
+	transition: all 1s;
+}
+.peristalsis_imgBox>span{
+	position: absolute;
+	top: 100px;
+}
+/* 判断鼠标滚动向下还是向上并给予图片蠕动效果 end */

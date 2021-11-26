@@ -256,7 +256,7 @@
             this.element.style.opacity = '1';
             this.element.style.position = 'fixed';
             // this.element.style.top = this.offsetTop + 'px';
-            this.element.style.top = '0px';
+            // $('.nowSticky').css('top','0px');
             this.placeholder.style.display = 'block';
             this.posScheme = PositionSticky.POS_SCHEME_FIXED;
         },
@@ -273,10 +273,11 @@
          * @instance
          */
         makeAbsolute: function() {
-            this.element.style.top = null;
+			this.element.style.top = null;
+			$('.nowSticky').css('top','');
             this.element.style.opacity = '1';
             // this.element.style.position = 'absolute';
-            // this.element.style.bottom = this.offsetBottom + 'px';
+            this.element.style.bottom = this.offsetBottom + 'px';
             this.placeholder.style.display = 'block';
             this.posScheme = PositionSticky.POS_SCHEME_ABSOLUTE;
         },
