@@ -11,7 +11,7 @@
 		<!-- 内容高度模拟盒子 -->
 		<div class="nowBox">内容高度模拟盒子</div>
 
-		<!-- 从暗到亮并显示相关文案动画效果  start-->
+		<!-- 从暗到亮并显示相关文案动画效果  start -->
 		<div class="box1">
 			<span>哈苏相机 L2D-20c</span>
 			<div class="box1_content">
@@ -27,9 +27,9 @@
 				</div>
 			</div>
 		</div>
-		<!-- 从暗到亮并显示相关文案动画效果  end-->
+		<!-- 从暗到亮并显示相关文案动画效果  end -->
 
-		<!-- 滚动缩放并伴随暗度增强动画效果 start-->
+		<!-- 滚动缩放并伴随暗度增强动画效果 start -->
 		<div class="box2_scrollScale">
 			<div class="sticky">
 				<div class="children_left">
@@ -64,19 +64,24 @@
 			<!-- 阴影遮罩 -->
 			<div class="box2_mask"></div>
 		</div>
-		<!-- 滚动缩放并伴随暗度增强动画效果 end-->
+		<!-- 滚动缩放并伴随暗度增强动画效果 end -->
 
 		<!-- 判断鼠标滚动向下还是向上并给予图片蠕动效果 start -->
 		<div class="peristalsis_imgBox">
 			<span>双摄影像系统自有高见</span>
-			<div class="peristalsis_img">
-			
-			</div>
+			<div class="peristalsis_img"></div>
 		</div>
 		<!-- 判断鼠标滚动向下还是向上并给予图片蠕动效果 end -->
-		
-		<!-- 内容高度模拟盒子 -->
-		<div class="nowBox">内容高度模拟盒子</div>
+
+		<!-- 滚动切换相应图片及文案 start -->
+		<div class="switchImg_Info">
+			<span>全向避障</span>
+			<h2>前避障</h2>
+			<img class="two" src="./img/4.webp" alt="">
+			<img class="one" src="./img/3.webp" alt="">
+		</div>
+		<!-- 滚动切换相应图片及文案 end -->
+
 		<!-- 内容高度模拟盒子 -->
 		<div class="nowBox">内容高度模拟盒子</div>
 	</body>
@@ -91,7 +96,7 @@
 		$('.nowSticky')[0].style.transition = "all .3s";
 		// $('.nowSticky')[0].style.top = "0px";
 	})
-	
+
 	/* 共享数据 start*/
 	let box1Offset = ''
 	let opacityValue = 0.8;
@@ -100,10 +105,10 @@
 	let scaleValue = 1;
 	let nowSticky = $(".nowSticky")[0];
 	let scrollTop;
-	let box2OpacityValue = 0.9; 
+	let box2OpacityValue = 0.9;
 	/* 共享数据 end*/
-	
-	
+
+
 	/* 滚动条监听事件 start*/
 	window.addEventListener('scroll', (res) => {
 		box1Offset = $('.box1').offset();
@@ -112,6 +117,7 @@
 		start(delta > 0 ? "down" : "up")
 		beforeScrollTop = afterScrollTop; //请勿将该变量赋值顺序颠倒，否则将会出现监听错乱问题
 		scrollScale(delta > 0 ? "down" : "up")
+		scrollSwitchImg()
 	})
 	/* 滚动条监听事件 end*/
 
@@ -125,7 +131,7 @@
 			}
 		} else if (delta == 'up') { //向上滚动
 			if ((box1Offset['top'] - afterScrollTop) > 50) {
-				opacityValue = (opacityValue + 0.03) >= 0.9 ? 0.9 : (opacityValue + 0.03);
+				opacityValue = (opacityValue + 0.01) >= 0.9 ? 0.9 : (opacityValue + 0.01);
 				$('.box1_mask').css('opacity', opacityValue);
 			}
 		}
@@ -144,7 +150,8 @@
 				$('.nowSticky').css('transform', `scale(${scaleValue})`)
 				$('.box2_mask').css('opacity', `${box2OpacityValue}`)
 			}
-		} else if (nowSticky.style.position == 'fixed' && delta == 'up' && isElementInViewport($('.box2_scrollScale')[0]) > -3490) {
+		} else if (nowSticky.style.position == 'fixed' && delta == 'up' && isElementInViewport($('.box2_scrollScale')[0]) >
+			-3490) {
 			if (scaleValue >= 1) {
 				scaleValue -= 0.005;
 				box2OpacityValue = (box2OpacityValue + 0.01) >= 0.9 ? 0.9 : (box2OpacityValue + 0.01);
@@ -154,45 +161,64 @@
 		}
 	}
 	/* 滚动缩放并伴随暗度增强动画 滚动事件  end*/
-	
-	
+
+
 	/* 判断获取元素是否在可视区域的指定位置出现 start*/
 	function isElementInViewport(el) {
-	    const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-	    const scrollTop = el.getBoundingClientRect() && el.getBoundingClientRect().top
-	    return scrollTop
+		const viewPortHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+		const scrollTop = el.getBoundingClientRect() && el.getBoundingClientRect().top
+		return scrollTop
 	}
 	/* 判断获取元素是否在可视区域的指定位置出现 end*/
-	
-	
+
+
 	/* 判断鼠标滚动向下还是向上并给予图片蠕动效果 start*/
 	let moveImg = document.getElementsByClassName('peristalsis_img')[0];
 	console.log(moveImg);
-	function onMouseWheel(ev) {/*当鼠标滚轮事件发生时，执行一些操作*/
-	  var ev = ev || window.event;
-	  var down = true; // 定义一个标志，当滚轮向下滚时，执行一些操作
-	  down = ev.wheelDelta ? ev.wheelDelta < 0 : ev.detail > 0;
-	  if (down) {
-	    moveImg.style.backgroundPosition = '50% -100px';
-	  } else {
-	    moveImg.style.backgroundPosition = '50% -10px';
-	  }
-	  if (ev.preventDefault) {/*FF 和 Chrome*/
-	    // ev.preventDefault();// 阻止默认事件
-	  }
-	  return false;
+
+	function onMouseWheel(ev) {
+		/*当鼠标滚轮事件发生时，执行一些操作*/
+		var ev = ev || window.event;
+		var down = true; // 定义一个标志，当滚轮向下滚时，执行一些操作
+		down = ev.wheelDelta ? ev.wheelDelta < 0 : ev.detail > 0;
+		if (down) {
+			moveImg.style.backgroundPosition = '50% -100px';
+		} else {
+			moveImg.style.backgroundPosition = '50% -10px';
+		}
+		if (ev.preventDefault) {
+			/*FF 和 Chrome*/
+			// ev.preventDefault();// 阻止默认事件
+		}
+		return false;
 	}
-	
+
 	addEvent(window, 'mousewheel', onMouseWheel);
 	addEvent(window, 'DOMMouseScroll', onMouseWheel);
-	
+
 	function addEvent(obj, xEvent, fn) {
-	  if (obj.attachEvent) {
-	    obj.attachEvent('on' + xEvent, fn);
-	  } else {
-	    obj.addEventListener(xEvent, fn, false);
-	  }
+		if (obj.attachEvent) {
+			obj.attachEvent('on' + xEvent, fn);
+		} else {
+			obj.addEventListener(xEvent, fn, false);
+		}
 	}
-	
 	/* 判断鼠标滚动向下还是向上并给予图片蠕动效果 end*/
+
+
+	/* 滚动切换相应图片及文案事件 start*/
+	function scrollSwitchImg() {
+		let scrollTtop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+		let offsetMain = $('.switchImg_Info')[0].offsetTop;
+		if (scrollTtop >= (offsetMain - 300)) {
+			$('.switchImg_Info .one')[0].style.opacity = '1';
+			$('.switchImg_Info .two')[0].style.opacity = '0';
+			$('.switchImg_Info h2')[0].innerText = '前避障';
+		} else{
+			$('.switchImg_Info .one')[0].style.opacity = '0';
+			$('.switchImg_Info .two')[0].style.opacity = '1';
+			$('.switchImg_Info h2')[0].innerText = '后壁障';
+		}
+	}
+	/* 滚动切换相应图片及文案事件 end*/
 </script>
